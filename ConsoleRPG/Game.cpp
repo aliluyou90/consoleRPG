@@ -16,10 +16,11 @@ Game::~Game()
 {
 }
 void Game::initGame() {
+	Enemy e(rand() & 10 + 1);
+	cout << e.getAsString() << endl;
+	
 	this->createNewCharacter();
-	Weapon w1(2, 5, "DDK", 1, 100, 100, 1);
-	cout << w1.toString();
-
+	
 }
 
 
@@ -40,7 +41,7 @@ void Game::loadCharacter()
 void Game::saveCharacter()
 {
 
-	std::ofstream outFile(fileName);
+	std::ofstream outFile(fileName,ios::app);
 		if (outFile.is_open()) {
 
 			for (size_t i = 0; i < characters.size(); i++) {
@@ -49,6 +50,15 @@ void Game::saveCharacter()
 
 		}
 		outFile.close();
+
+}
+void Game::Travel()
+{
+	this->characters[activeCharacter].travel();
+	Event ev;
+	ev.generateEvent();
+
+
 
 }
 void Game::mainMenu()

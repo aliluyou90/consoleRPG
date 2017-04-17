@@ -1,5 +1,6 @@
 #pragma once
 #include "Inventory.h"
+#include "Enemy.h"
 
 
 using namespace std;
@@ -24,7 +25,7 @@ public:
 		return this->yPos;
 	}
 
-
+	inline const int& getDistTravel() const { this->distanceTravelled; }
 	inline const string & getName() const {
 		return this->name;
 	}
@@ -59,14 +60,17 @@ public:
 	inline const int & getDefence() const {
 		return this->defence;
 	}
-	
+	inline const int & getAccuracy() const {
+		return this->accuracy;
+	}
 	//modifier
 
+	inline void setDistTravel(const int& distance) { this->distanceTravelled = distance; }
+	inline void travel() { this->distanceTravelled++; }
 private:
 	
-	//location
-	double xPos;
-	double yPos;
+
+	
 	Inventory inventory;
 	Weapon weapon;
 	Armor armor_head;
@@ -74,15 +78,21 @@ private:
 	Armor armor_arms;
 	Armor armor_legs;
 
+	//location
+	double xPos;
+	double yPos;
+	int distanceTravelled;
+
 	string name;
 	int level;
 	int exp, expNext;
 	int strength, vitality, dexterity, intelligence;
-
+	int gold;
 	int hp,hpmax;
 	int stamina, staminaMax;
 	int demageMin, demageMax;
 	int defence;
+	int accuracy;
 	int statPoints;
 	int skillPoints;
 	int luck;

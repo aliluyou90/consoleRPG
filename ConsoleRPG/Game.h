@@ -1,8 +1,9 @@
 #pragma once
-#include "Character.h"
+
 #include <ctime>
 #include <vector>
 #include <fstream>
+#include "Event.h"
 using namespace std;
 
 
@@ -17,6 +18,7 @@ public:
 	void createNewCharacter();
 	void loadCharacter();
 	void saveCharacter();
+	void Travel();
 	//operators
 
 	//accessors

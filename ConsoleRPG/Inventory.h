@@ -15,7 +15,7 @@ public:
 	//function
 	void addItem(const Item & item);
 	void removeItem(int index);
-
+	inline int size()const { return this->nrofItems; }
 	inline void debugPrint() const {
 
 		for (size_t i = 0; i < this->nrofItems; i++) {
