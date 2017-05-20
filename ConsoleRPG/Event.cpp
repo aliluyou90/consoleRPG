@@ -11,9 +11,10 @@ Event::Event()
 
 Event::~Event()
 {
+
 }
 
-void Event::generateEvent()
+void Event::generateEvent(Character & character)
 {
 
 	int i = rand() % this->nrofEvents;
@@ -21,9 +22,18 @@ void Event::generateEvent()
 	switch (i) {
 		//Enemy encounter
 	case 0:
+		cout << "see enemy\n" << endl;
+		
+		{Enemy enemy(character.getLevel()); 
+		character.battle(enemy);
+		
+		}
+		
 		break;
 		// Puzzle
 	case 1:
+		cout << "see problems\n" << endl;
+		//character.puzzleAward();
 		break;
 
 
@@ -36,3 +46,14 @@ void Event::generateEvent()
 
 
 }
+
+void Event::getEnemy(int level)
+{
+	Enemy enemy(level);
+	
+
+}
+
+
+
+

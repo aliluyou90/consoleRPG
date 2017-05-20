@@ -7,17 +7,19 @@ Enemy::Enemy(int level)
 	this->level = level;
 	this->hpMax = level * 10;
 	this->hp = hpMax;
-	this->demageMin = this->level * 4;
-	this->demageMax = this->level * 5;
+	this->demageMin = static_cast<int>(this->level/10 * (rand()%5 +5)) + rand() % 2 +1;
+	this->demageMax = static_cast<int>(this->demageMin*1.2);
 	this->defence = rand() % 100;
 	this->accuracy = rand() % 100;
-	this->dropChance = rand() % 100;
+
 }
 
 
 Enemy::~Enemy()
 {
+
 }
+
 
 string Enemy::getAsString() const
 {

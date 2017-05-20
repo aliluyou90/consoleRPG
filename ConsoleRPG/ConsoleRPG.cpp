@@ -3,19 +3,20 @@
 
 #include "stdafx.h"
 //#include <iostream>
-#include "Game.h"
+#include "MainMenu.h"
 using namespace std;
 
 int main()
 {
 	srand(time(NULL));
-	Game game;
-	game.initGame();
+	MainMenu main;
 	//Inventory inv;
+	Game g;
+	g.loadCharacter();
 
-	while (game.getPlaying()) {
+	while (main.getPlaying()) {
 
-		game.mainMenu();
+		main.mainMenu();
 
 	}
 

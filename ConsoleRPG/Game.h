@@ -30,7 +30,7 @@ private:
 
 	//character related
 	int activeCharacter;
-	vector<Character> characters;
+	Character character;
 	string fileName;
 	
 };
