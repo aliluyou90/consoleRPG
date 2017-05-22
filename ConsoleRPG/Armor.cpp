@@ -24,7 +24,4 @@ string Armor::debugPrint() const
 	return str;
 }
 
-vector<int> Armor::useItem()
-{
-	return vector<int>();
-}
+

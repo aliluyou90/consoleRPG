@@ -3,6 +3,7 @@
 #include "Enemy.h"
 
 
+
 using namespace std;
 class Character
 {
@@ -97,7 +98,7 @@ public:
 	}
 	inline void setHpVita() { this->hpVita += this->vitality / 4 + 1; }
 	// inventory
-	void printInvInfo();
+	void useInv();
 
 
 private:
@@ -131,5 +132,5 @@ private:
 	
 
 
-};
+} ;
 

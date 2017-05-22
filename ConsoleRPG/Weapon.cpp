@@ -36,6 +36,7 @@ void Weapon::genWeapon()
 
 Weapon * Weapon::clone() const
 {
+	cout << " ===== You get "  <<this->getName() << "! ====="<< endl;
 	return new Weapon(*this);
 }
 
@@ -53,14 +54,15 @@ string Weapon::debugPrint() const
 	return str;
 }
 
-vector<int> Weapon::useItem()
+void Weapon::useItem(int& hp, int& demageMax, int& demageMin, int& defense)
 {
-	vector<int> v;
-	v.push_back(1);
-	v.push_back(this->demageMin);
-	v.push_back(this->demageMax);
-	return vector<int>();
+	cout << this->getName()<< "is used" << endl;
+	demageMax += this->demageMax;
+	demageMin += this->demageMin;
 }
+
+
+
 
 
 

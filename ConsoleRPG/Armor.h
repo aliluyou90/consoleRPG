@@ -14,6 +14,8 @@ public:
 
 	virtual Armor* clone() const;
 	virtual string debugPrint() const;
-	virtual vector<int> useItem();
+
+	//解决使用Item的问题
+	virtual void useItem(int& hp, int& demageMax, int& demageMin, int& defense) {};
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include"Item.h"
 #include <string>
+
 class Weapon : public Item
 {
 
@@ -19,6 +20,6 @@ public:
 	virtual Weapon* clone() const;
 	void setDemage(int type);
 	string debugPrint() const;
-	vector<int> useItem();
+	void useItem(int& hp, int& demageMax, int& demageMin, int& defense);
 };
 

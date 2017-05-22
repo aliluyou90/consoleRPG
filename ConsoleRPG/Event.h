@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "Puzzle.h"
 #include "Character.h"
-#include "Enemy.h"
+
 
 class Event
 {

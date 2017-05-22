@@ -63,9 +63,24 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 
 }
 
-void Character::printInvInfo()
+void Character::useInv()
 {
 	this->inventory.debugPrint();
+	bool flag = true;
+	int choice = -1;
+	
+	while (flag) {
+cout << "use Item? "<< endl <<"Item Number : Yes \n 0 : Exit" << endl;
+		cin >> choice;
+		if (choice == 0) { flag = false;}
+		else if (choice > 0 && choice < this->inventory.getNumItem()) {
+		this->inventory[choice].useItem(this->hp, this->demageMax, this->demageMin, this->defence);
+		}
+		
+	}
+
+
+
 }
 
 void Character::printStatus() const

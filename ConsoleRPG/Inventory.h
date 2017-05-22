@@ -19,18 +19,18 @@ public:
 	inline void debugPrint() const {
 
 		for (size_t i = 0; i < this->nrofItems; i++) {
-			cout << this->itemArr[i]->debugPrint() << endl;
+			cout << (*this->itemArr)[i]->debugPrint() << endl;
 		}
 	}
 	void getItem(int dropchance,  int level);
+	inline int getNumItem() const{ return this->nrofItems; }
 private:
 	
 	int capacity;
 	int nrofItems;
-	Item ** itemArr;
+	vector<Item*>  *itemArr;
 	// functions
-	void initItem(const int from = 0);
-	void expand();
+
 	
 };
 

@@ -118,7 +118,8 @@ void Game::mainMenu()
 			this->Travel();
 			break;
 		case 2:
-			this->character.printInvInfo();
+			this->character.useInv();
+			
 			break;
 		case 3:
 			character.useStatPoint();

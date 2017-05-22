@@ -6,17 +6,18 @@
 #include <vector>
 
 using namespace std;
-
+class Character;
 class Item
 {
+	
 private:
 	string name;
 	int level;
 	int Value;
 	int rarity;
 	int numPile;
+	void * as;
 	
-
 public:
 	Item( int level = 1, int rarity = 1, int numPile = 1);
 	virtual ~Item();
@@ -25,7 +26,7 @@ public:
 		return this->name + " " + to_string(this->Value);
 	}
 	virtual Item* clone() const = 0;
-	virtual vector<int> useItem() = 0;
+	
 	
 	// accessors
 	inline const string& getName() const { return this->name; };
@@ -38,5 +39,6 @@ public:
 	//modifiers
 	virtual void setName( string name);
 	virtual void setValue(int extra);
+	virtual void useItem(int& hp, int& demageMax, int& demageMin, int& defense) = 0;
 };
 
