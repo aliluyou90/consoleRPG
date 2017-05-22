@@ -11,21 +11,10 @@ Character::Character()
 
 	this->name  = "NONE";
 	this->level = 1;
-	this->exp = 0;
-	this->expNext = 0;
-	this->hp=0, hpmax=0;
-	this->stamina = 0;
-	this->demageMin = 0, demageMax = 0;
-	this->defence = 0;
+	this->hpVita = 0;
 	this->statPoints = 0;
 	this->skillPoints = 0;
-	this->gold = 0;
-	//this->strength = 0;
-//	this->intelligence = 0;
-	//this->vitality = 0;
-	//this->dexterity = 0;
-
-
+	
 }
 
 
@@ -37,7 +26,18 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 	int gold , int level, int exp, int strength, int vitality ,
 	int dexterity , int intelligence )
 {
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
+	inventory.getItem(99, 33);
 
+	cout << inventory[3].debugPrint();
 	this->xPos = xPos;
 	this->yPos = yPos;
 	this->distanceTravelled = distanceTravelled;
@@ -47,10 +47,8 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 	this->exp = exp;
 	this->expNext = static_cast<int>((50/3) *(pow(level,3) 
 		- 6 * pow(level,2) + 17*level - 12))+10;
-	
 	this-> strength = strength, this->vitality = vitality, this->dexterity = dexterity, this->intelligence = intelligence;
-	
-	this->hpmax = 40;
+	this->hpmax = 15;
 	if(hp == 0) this->hp = this->hpmax;
 	else this->hp = hp;
 	this->staminaMax = this->vitality + (this->strength / 2) + (this->dexterity / 3);
@@ -58,63 +56,68 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 	else this->stamina = stamina;
 	
 
-	this->demageMin = static_cast<int>(this->strength*0.8);
-	this->demageMax = static_cast<int>(this->strength*1.2);
+	this->setDemage();
 	this->defence = this->dexterity + (this->intelligence / 2);
 	this->accuracy = (this->dexterity / 2);
 	this->luck = this->intelligence;
 
 }
 
+void Character::printInvInfo()
+{
+	this->inventory.debugPrint();
+}
+
 void Character::printStatus() const
 {
 
-	cout << " -- CHaractar.sheet" << endl;
+	
+
+	cout << " -- Charactar.sheet" << endl;
 	cout << " -- Name: " << this->name << "    -- Level: " << this->level ;
 	cout << "    -- Exp: " << this->exp <<"/"<< this->expNext << endl;
 	cout << " -- Demage: " << this->demageMin << " - " << this->demageMax << endl;
 	cout << " -- HP: " << this->hp << "/" << this->hpmax << "   " << "Stamina: " << this->stamina << "/" << this->staminaMax << "   " << "Defence: " << this->defence << endl;
-	cout << " -- Strength: " << this->strength << "   " << "Vitality:  " << this->vitality << endl;
-	cout<< " -- Dexterity: " << this->dexterity << "   " << "Intelligence: " << this->intelligence << endl;
-	cout << " -- Luck: " << this->luck << "   "<< "Accuracy: "<<this->accuracy << endl;
-	cout << endl;
+	cout << " -- Luck: " << this->luck << "   " << "Accuracy: " << this->accuracy << endl;
+	cout << endl << endl;
 
 }
 
 void Character::levelUp()
 {
-		this->statPoints++;
+		this->statPoints += 2;
 		this->skillPoints++;
 		this->exp -= this->expNext;
 		this->level++;
-
-
-
+		
+		cout << "Level UP! "<< this->level-1 << " -> "<< this->level << endl;
+		cout << " == You have 2 more status points.\n" << endl;
+		
 		this->expNext = static_cast<int>((50 / 3) *(pow(level, 3)
 			- 6 * pow(level, 2) + 17 * level - 12))+10;
-		this->hpmax = static_cast<int>(9 * pow(this->strength, 1.3) - 4 * pow(this->strength, 1.2)) + 20;
+
+		this->setHpMax();
 		this->hp = this->hpmax;
 
-		this->demageMin = static_cast<int>(this->strength*1.5*0.8);
-		this->demageMax = static_cast<int>(this->strength*1.5 * 1.1);
+		this->setDemage();
 
-		cout << "level up!!!\n" << endl;
-
-}
-
-void Character::battleAward(int level)
-{
+		
 
 }
+
+
 
 void Character::battle(Enemy & enemy)
 {
+	cout << enemy.getAsString() << endl;
 	bool flag = true;
 	int round = 0;
 	while (flag) {
 		int choice = 0;
 		cout << " == Battle Menu == " << endl;
-		//printf("%s: HP = %d/%d     || Enemy: HP = %d/%d", this->name, this->hp, this->hpmax,enemy.gethp(),enemy.gethpMax());
+		cout << this->name << ": HP = " << this->hp << " / " << this->hpmax;
+		cout << "     | " << "Enemy: HP = " << enemy.gethp() << " / " << enemy.gethpMax()<< endl;
+		
 		cout << "1: Attack" << endl;
 		cout << "2: Run\n" << endl;
 		cout << endl;
@@ -133,6 +136,7 @@ void Character::battle(Enemy & enemy)
 				if (!enemy.isAlice()) {
 					this->winBattle();
 					this->statusUpdate(enemy.getExp(), enemy.getGold());
+					this->inventory.getItem(enemy.getDropChance(), enemy.getLevel());
 					flag = false;
 					break;
 				};
@@ -151,7 +155,7 @@ void Character::battle(Enemy & enemy)
 			break;
 		case 2:
 			_sleep(1000);
-			cout << "you cannot run like a coward!";
+			cout << "you cannot run like a coward!\n";
 			_sleep(1000);
 		default:
 			break;
@@ -167,11 +171,57 @@ void Character::statusUpdate(int exp, int gold)
 {
 	this->exp += exp;
 	this->gold += gold;
-	cout << "You get " << exp << " exp and " << gold << " gold." << endl;
+	cout << "\nYou get " << exp << " exp and " << gold << " gold." << endl;
+
+	
+	
 	if (this->exp >= this->expNext) {
 		this->levelUp();
 	}
 }
+
+
+void Character::useStatPoint()
+{
+	cout << " == Attribute ==" << endl;
+	cout << " -- 1. Strength: " << this->strength << "   " << "2. Vitality:  " << this->vitality << endl;
+	cout << " -- 3. Dexterity: " << this->dexterity << "   " << "4. Intelligence: " << this->intelligence << endl;
+	cout << " == Status Point: " << this->statPoints << endl;
+
+		int choice = 0;
+		while (this->statPoints) {
+			cout << " Which attribute you want to improve?" << endl;
+			cin >> choice;
+			this->statPoints--;
+			switch (choice) {
+
+			case 1:
+				cout << "Strength +1" << endl;
+				this->strength++;
+				this->setDemage();
+				break;
+			case 2:
+				cout << "Vitality +1" << endl;
+				this->vitality++;
+				this->setHpVita();
+				this->setHpMax();
+				break;
+			case 3:
+
+				break;
+			case 4:
+
+				break;
+
+
+			default:
+				break;
+			}
+			cout << " == Status Point: " << this->statPoints << endl;
+		}
+}
+
+
 
 string Character::getAsString() const
 {
@@ -193,3 +243,5 @@ string Character::getAsString() const
 		//+ to_string(skillPoints);
 
 }
+
+

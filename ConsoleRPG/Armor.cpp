@@ -17,9 +17,14 @@ Armor * Armor::clone() const
 	return new Armor(*this);
 }
 
-string Armor::toString()
+string Armor::debugPrint() const
 {
 	string str =  to_string(this->type) + " " 
 		+ to_string(this->defence);
 	return str;
+}
+
+vector<int> Armor::useItem()
+{
+	return vector<int>();
 }

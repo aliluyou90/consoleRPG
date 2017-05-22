@@ -38,7 +38,7 @@ void MainMenu::mainMenu()
 		break;
 
 	case 3:
-		playing = false;
+		this->playing = false;
 		break;
 
 	default:
@@ -55,6 +55,9 @@ void MainMenu::startGame()
 {
 
 	this->game.initGame();
+
+	
+
 	while (game.getPlaying())
 		game.mainMenu();
 

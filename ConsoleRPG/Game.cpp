@@ -93,11 +93,16 @@ void Game::mainMenu()
 {
 	if (!character.isAlive()) { this->playing = false; }
 	else {
+
+
+		
+
+
 		cout << "Main Menu" << endl;
 		cout << "1: Travel" << endl;
-		cout << "2: Shop" << endl;
-		cout << "3: Level up" << endl;
-		cout << "4: Check Status" << endl;
+		cout << "2: Inventory" << endl;
+		cout << "3: Status Points" << endl;
+		cout << "4: Check Info" << endl;
 		cout << "5: Save game" << endl;
 		cout << "0: Quit" << endl;
 		cout << endl;
@@ -111,6 +116,12 @@ void Game::mainMenu()
 			break;
 		case 1:
 			this->Travel();
+			break;
+		case 2:
+			this->character.printInvInfo();
+			break;
+		case 3:
+			character.useStatPoint();
 			break;
 		case 4:
 			character.printStatus();

@@ -13,6 +13,7 @@ public:
 	virtual ~Armor();
 
 	virtual Armor* clone() const;
-	string toString();
+	virtual string debugPrint() const;
+	virtual vector<int> useItem();
 };
 

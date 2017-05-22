@@ -11,12 +11,19 @@ int main()
 	srand(time(NULL));
 	MainMenu main;
 	//Inventory inv;
-	Game g;
-	g.loadCharacter();
+	/*
+	int res,weaponLevel;
+	int level = 1, rarity = 1;
+	while (level < 30) {
+		weaponLevel = (level / 10) + 1;
+		res = static_cast<int>((weaponLevel - 1) * level + rand() % level*(10 + rarity) / 10 * 0.8)+1;
+		cout << res << endl;
+		level++;
+	}*/
 
-	while (main.getPlaying()) {
+		while (main.getPlaying()) {
 
-		main.mainMenu();
+ 		main.mainMenu();
 
 	}
 

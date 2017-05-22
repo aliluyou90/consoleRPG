@@ -78,3 +78,23 @@ void Inventory::expand()
 	this->initItem(this->nrofItems);
 
 }
+
+void Inventory::getItem(int dropchance,int level)
+{
+	if (rand() % 100 > dropchance) { return; }
+	int rarity, randnum = rand() % 100;
+	if (randnum<5) {
+		rarity = 5;
+	}
+	else if (randnum >= 5 && randnum < 15) { rarity = 4; }
+	else if (randnum >= 15 && randnum < 30) { rarity = 3; }
+	else if (randnum >= 30 && randnum < 50) { rarity = 2; }
+	else { rarity = 1; }
+
+	Weapon w(level,rarity);
+	w.genWeapon();
+	this->addItem(w);
+	
+
+}
+

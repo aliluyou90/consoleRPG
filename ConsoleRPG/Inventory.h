@@ -22,7 +22,7 @@ public:
 			cout << this->itemArr[i]->debugPrint() << endl;
 		}
 	}
-
+	void getItem(int dropchance,  int level);
 private:
 	
 	int capacity;
@@ -31,5 +31,6 @@ private:
 	// functions
 	void initItem(const int from = 0);
 	void expand();
+	
 };
 

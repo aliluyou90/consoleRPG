@@ -1,23 +1,24 @@
 #pragma once
 #include"Item.h"
+#include <string>
 class Weapon : public Item
 {
 
 private:
 	int demageMin;
 	int demageMax;
+	int weaponLevel;
 
 public:
-	Weapon(int demageMin = 0, int demageMax = 0, 
-		string name = "NONE", int level = 0, 
-		int buyValue=0, int sellValue = 0, int rarity = 0);
+	Weapon(int level = 1,  int rarity = 1, int numPile = 1);
 	virtual ~Weapon();
-
+	void genWeapon();
 
 	//pure virtual
 
 	virtual Weapon* clone() const;
-
-	string toString();
+	void setDemage(int type);
+	string debugPrint() const;
+	vector<int> useItem();
 };
 

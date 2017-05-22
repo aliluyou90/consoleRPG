@@ -5,12 +5,13 @@
 Enemy::Enemy(int level)
 {
 	this->level = level;
-	this->hpMax = level * 10;
+	this->hpMax = static_cast<int>((9 * pow(level, 1.3) - 4 * pow(level, 1.2)) / 10 * (rand() % 3 + 5)) + 10;
 	this->hp = hpMax;
-	this->demageMin = static_cast<int>(this->level/10 * (rand()%5 +5)) + rand() % 2 +1;
+	this->demageMin = static_cast<int>(this->level * (rand()%3 +6))/10 + (rand() % 2 +1);
 	this->demageMax = static_cast<int>(this->demageMin*1.2);
 	this->defence = rand() % 100;
-	this->accuracy = rand() % 100;
+	this->accuracy = 0.75;
+	this->dropChance = 25;
 
 }
 
