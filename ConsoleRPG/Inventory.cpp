@@ -6,7 +6,7 @@ Inventory::Inventory()
 {
 	this->capacity = 50;
 	this->nrofItems = 0;
-	this->itemArr = new vector<Item*>;
+
 
 	
 }
@@ -14,10 +14,7 @@ Inventory::Inventory()
 
 Inventory::~Inventory()
 {
-	for (size_t i = 0; i < this->nrofItems; i++) {
-		delete (*(this->itemArr))[i];
-	}
-	delete this->itemArr;
+	
 }
 
 Inventory::Inventory(const Inventory & obj)
@@ -38,16 +35,41 @@ Item & Inventory::operator[](const int index)
 	// TODO: insert return statement here
 	if (index < 0 || index >= this->nrofItems)
 		throw ("Bad Index!");
-		return *(*this->itemArr)[index];
+		return this->weaponVec[index];
 
 }
 
-void Inventory::addItem(const Item & item)
+void Inventory::invInfo()
+{
+	cout << "1 : weapon 2 : armor \n";
+	int choice = 0;
+	cin >> choice;
+	switch (choice) {
+	case 1 :
+		this->weaponPrint();
+			break;
+	case 2 :
+		this->armorPrint();
+			break;
+
+	default:
+		break;
+	}
+}
+
+void Inventory::addItem(const Weapon & item)
 {
 	
-	if(nrofItems++>50) return;
-	(*this->itemArr).push_back ( item.clone());
+	if(nrofItems++>this->capacity) return;
+	this->weaponVec.push_back ( *item.clone());
 }
+void Inventory::addItem(const Armor & item)
+{
+
+	if (nrofItems++>this->capacity) return;
+	this->armorVec.push_back(*item.clone());
+}
+
 
 void Inventory::removeItem(int index)
 {
@@ -71,9 +93,7 @@ void Inventory::getItem(int dropchance,int level)
 	else { rarity = 1; }
 
 	Weapon w(level,rarity);
-	w.genWeapon();
-	this->addItem(w);
-	
 
+	this->addItem(w);
 }
 

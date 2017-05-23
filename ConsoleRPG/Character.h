@@ -103,11 +103,10 @@ public:
 
 private:
 	Inventory inventory;
-	Weapon *weapon;
+	Item *weapon;
 	Armor armor_head;
-	Armor armor_chest;
-	Armor armor_arms;
-	Armor armor_legs;
+	Armor armor_body;
+	Armor armor_foot;
 
 	//location
 	double xPos;

@@ -10,7 +10,7 @@ Weapon::Weapon(int level, int rarity, int numPile)
 	this->demageMax = 0;
 	this->demageMin = 0;
 	this->weaponLevel = 1 + level / 3;
-
+	this->genWeapon();
 
 
 }
