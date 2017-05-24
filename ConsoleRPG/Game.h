@@ -4,7 +4,7 @@
 #include <vector>
 #include <fstream>
 #include "Event.h"
-
+#include "ItemSystem.h"
 using namespace std;
 
 
@@ -33,6 +33,7 @@ private:
 	int activeCharacter;
 	Character character;
 	string fileName;
-	
+	ItemSystem itemsystem;
+
 };
 

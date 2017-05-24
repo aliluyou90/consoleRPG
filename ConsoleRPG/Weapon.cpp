@@ -54,12 +54,31 @@ string Weapon::debugPrint() const
 	return str;
 }
 
-void Weapon::useItem(int& hp, int& demageMax, int& demageMin, int& defense)
+Item* Weapon::useItem(Character * character)
 {
+	Item * it = character->getWeaponOn();
+	
+	character->setWeaponOn(this);
 	cout << this->getName()<< "is used" << endl;
-	demageMax += this->demageMax;
-	demageMin += this->demageMin;
+	character->setDemage(this->demageMax, this->demageMin);
+
+	
+	return it;
 }
+
+void Weapon::itemInterface()
+{
+	cout << this->debugPrint();
+	cout << "=======use it (1) or not (any)" << endl;
+	bool choice = false;
+	cin >> choice;
+	
+
+
+
+}
+
+
 
 
 

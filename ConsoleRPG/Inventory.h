@@ -13,37 +13,22 @@ public:
 	void invInfo();
 
 	//function
-	void addItem(const Weapon & item);
-	void Inventory::addItem(const Armor & item);
+	void addItem(const Item & item);
+
 	void removeItem(int index);
 	inline int size()const { return this->nrofItems; }
 
-	inline void weaponPrint() const {
-		for (size_t i = 0; i < this->weaponVec.size(); i++) {
-			cout << this->weaponVec[i].debugPrint() << endl;
-		}
-	}
-	inline void armorPrint() const {
-		for (size_t i = 0; i < this->armorVec.size(); i++) {
-			cout << this->weaponVec[i].debugPrint() << endl;
-		}
-	}
-
-
-
-
-
 	void getItem(int dropchance,  int level);
 	inline int getNumItem() const{ return this->nrofItems; }
-
+	Item* itemFactory(int dropchance, int level);
 
 private:
 	
 	int capacity;
 	int nrofItems;
+	vector<Item*>  itemVec;
 
-	vector<Weapon>  weaponVec;
-	vector<Armor>  armorVec;
+	
 	
 	
 	// functions

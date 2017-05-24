@@ -1,10 +1,11 @@
 #pragma once
-#include "Inventory.h"
+#include <iostream>
 #include "Enemy.h"
 
 
 
 using namespace std;
+class Item;
 class Character
 {
 	
@@ -77,6 +78,10 @@ public:
 	inline const int & getAccuracy() const {
 		return this->accuracy;
 	}
+	inline Item* getWeaponOn() const{ return this->weapon; }
+	inline Item* getHeadOn() const { return this->armorHead; }
+	inline Item* getBodyOn() const { return this->armorBody; }
+	inline Item* getFootOn() const { return this->armorFoot; }
 	//modifier
 	inline const bool isAlive()  { return  this->hp > 0; }
 	inline void setDistTravel(const int& distance) { this->distanceTravelled = distance; }
@@ -85,29 +90,48 @@ public:
 	inline void takeDemage(int demage) { this->hp -= demage; cout << this->name << " lose" << demage << " HP\n"; }
 	inline void winBattle() { cout << this->name << " Won!!" << endl; }
 	inline void deadEnd() { cout << "u r dead !\n" ;  }
+	inline void setWeaponOn(Item* item) { this->weapon = item; }
+	inline void setFootOn(Item* item) {
+		this->armorFoot = item; // foot
+	
+	}
+	inline void setHeadOn(Item* item) {
+		this->armorHead = item; // head
 
-	// stat update
+	}
+	inline void setBodyOn(Item* item) {
+		this->armorBody = item; // body
 
-	inline void setDemage(){
-		this->demageMin = static_cast<int>(this->strength*1.5*0.8);
-		this->demageMax = static_cast<int>(this->strength*1.5 * 1.2);
+	}
+	
+	// status interface
+
+	inline void setDemage(int demageMax=0, int demageMin=0){
+		this->exDemageMax = demageMax;
+		this->exDemageMin = demageMin;
+		this->demageMin = static_cast<int>(this->strength*1.5*0.8)+ this->exDemageMin;
+		this->demageMax = static_cast<int>(this->strength*1.5 * 1.2) + this->exDemageMax;
 	}
 	inline void setHpMax() {
 		this->hpmax = static_cast<int>(9 * pow(this->level, 1.3) - 4 * pow(this->level, 1.2))+10 + this->hpVita;
 		
 	}
 	inline void setHpVita() { this->hpVita += this->vitality / 4 + 1; }
-	// inventory
-	void useInv();
+	// Equipment
 
+	inline void setDefenseHead(int def) { this->defenceHead = def; }
+	inline void setDefenseBody(int def) { this->defenceBody = def; }
+	inline void setDefenseFoot(int def) { this->defenceFoot = def; }
+	
+	
+	inline void setDefense(){ this->defence = this->defenceHead + this->defenceFoot + this->defenceBody;
+	}
 
 private:
-	Inventory inventory;
-	Item *weapon;
-	Armor armor_head;
-	Armor armor_body;
-	Armor armor_foot;
-
+	Item * weapon;
+	Item * armorBody;
+	Item * armorFoot;
+    Item * armorHead;
 	//location
 	double xPos;
 	double yPos;
@@ -121,7 +145,9 @@ private:
 	int hp,hpmax,hpVita;
 	int stamina, staminaMax;
 	int demageMin, demageMax;
-	int defence;
+	int exDemageMin, exDemageMax;
+	int defence, defenceHead, defenceFoot,defenceBody;
+
 	int accuracy;
 	int statPoints;
 	int skillPoints;

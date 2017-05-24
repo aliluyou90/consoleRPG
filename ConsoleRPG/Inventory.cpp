@@ -6,9 +6,19 @@ Inventory::Inventory()
 {
 	this->capacity = 50;
 	this->nrofItems = 0;
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
+	this->getItem(99, 1);
 
-
-	
 }
 
 
@@ -35,47 +45,37 @@ Item & Inventory::operator[](const int index)
 	// TODO: insert return statement here
 	if (index < 0 || index >= this->nrofItems)
 		throw ("Bad Index!");
-		return this->weaponVec[index];
+		return *this->itemVec[index];
 
 }
 
 void Inventory::invInfo()
 {
-	cout << "1 : weapon 2 : armor \n";
-	int choice = 0;
-	cin >> choice;
-	switch (choice) {
-	case 1 :
-		this->weaponPrint();
-			break;
-	case 2 :
-		this->armorPrint();
-			break;
-
-	default:
-		break;
+	cout << "==========  Inventory  ===========" << endl;
+	for (size_t i = 0; i < this->nrofItems; i++) {
+		cout << "--- "<<i+1<< ": " <<this->itemVec[i]->getName() << endl;
 	}
+	cout << "==================================" << endl;
 }
 
-void Inventory::addItem(const Weapon & item)
+void Inventory::addItem(const Item & item)
 {
 	
 	if(nrofItems++>this->capacity) return;
-	this->weaponVec.push_back ( *item.clone());
-}
-void Inventory::addItem(const Armor & item)
-{
-
-	if (nrofItems++>this->capacity) return;
-	this->armorVec.push_back(*item.clone());
+	this->itemVec.push_back ( item.clone());
 }
 
 
 void Inventory::removeItem(int index)
 {
+	vector<Item*>::iterator it = this->itemVec.begin()+index ;
+
+	this->itemVec.erase(it);
+
 
 	nrofItems--;
 }
+
 
 
 
@@ -92,8 +92,24 @@ void Inventory::getItem(int dropchance,int level)
 	else if (randnum >= 30 && randnum < 50) { rarity = 2; }
 	else { rarity = 1; }
 
-	Weapon w(level,rarity);
+	;
 
-	this->addItem(w);
+	this->addItem(*this->itemFactory(level, rarity));
+}
+
+Item* Inventory::itemFactory(int level, int rarity)
+{
+	Item * item = nullptr;
+	int res = rand() % 2;
+	
+	if (res == 0) { item = new Weapon(level, rarity);
+	}
+	else {
+		item = new Armor(level, rarity);
+	}
+
+	return item;
+
+
 }
 

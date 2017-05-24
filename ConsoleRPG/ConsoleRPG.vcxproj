@@ -146,6 +146,7 @@
     <ClInclude Include="Header.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemSystem.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Puzzle.h" />
     <ClInclude Include="stdafx.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemSystem.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Puzzle.cpp" />
     <ClCompile Include="stdafx.cpp">

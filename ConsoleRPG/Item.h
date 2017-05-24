@@ -4,9 +4,9 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-
+#include "Character.h"
 using namespace std;
-class Character;
+
 class Item
 {
 	
@@ -16,7 +16,7 @@ private:
 	int Value;
 	int rarity;
 	int numPile;
-	void * as;
+
 	
 public:
 	Item( int level = 1, int rarity = 1, int numPile = 1);
@@ -39,6 +39,7 @@ public:
 	//modifiers
 	virtual void setName( string name);
 	virtual void setValue(int extra);
-	virtual void useItem(int& hp, int& demageMax, int& demageMin, int& defense) = 0;
+	virtual Item* useItem(Character* character) = 0;
+	virtual void itemInterface() = 0;
 };
 

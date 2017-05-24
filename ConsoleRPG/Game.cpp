@@ -9,6 +9,8 @@ Game::Game()
 	activeCharacter = 0;
 	fileName = "characters.txt";
 
+
+
 }
 
 
@@ -118,7 +120,11 @@ void Game::mainMenu()
 			this->Travel();
 			break;
 		case 2:
-			this->character.useInv();
+
+
+			this->itemsystem.init(&character);
+
+		
 			
 			break;
 		case 3:

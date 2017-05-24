@@ -20,6 +20,8 @@ public:
 	virtual Weapon* clone() const;
 	void setDemage(int type);
 	string debugPrint() const;
-	void useItem(int& hp, int& demageMax, int& demageMin, int& defense);
+	Item* useItem(Character* character);
+	
+	void itemInterface();
 };
 

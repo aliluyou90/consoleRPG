@@ -14,7 +14,17 @@ Character::Character()
 	this->hpVita = 0;
 	this->statPoints = 0;
 	this->skillPoints = 0;
+	this->exDemageMin = 0;
+    this->exDemageMax = 0;
+	this->weapon = nullptr;
+	this->armorHead = nullptr;
+	this->armorFoot = nullptr;
+	this->armorBody = nullptr;
 	
+	this->defenceHead = 0;
+	this->defenceBody = 0;
+	this->defenceFoot = 0;
+	this->defence = this->defenceHead + this->defenceFoot + this->defenceBody ;
 }
 
 
@@ -26,18 +36,7 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 	int gold , int level, int exp, int strength, int vitality ,
 	int dexterity , int intelligence )
 {
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
-	inventory.getItem(99, 33);
 
-	cout << inventory[3].debugPrint();
 	this->xPos = xPos;
 	this->yPos = yPos;
 	this->distanceTravelled = distanceTravelled;
@@ -63,27 +62,6 @@ void Character::initialize(const string name, int hp, int stamina , double xPos 
 
 }
 
-void Character::useInv()
-{
-	this->inventory.invInfo();
-	bool flag = true;
-	int choice = -1;
-	
-	while (flag) {
-cout << "use Item? "<< endl <<"Item Number : Yes \n 0 : Exit" << endl;
-		cin >> choice;
-		if (choice == 0) { flag = false;}
-		else if (choice > 0 && choice < this->inventory.getNumItem()) {
-		this->inventory[choice].useItem(this->hp, this->demageMax, this->demageMin, this->defence);
-		this->weapon = &this->inventory[choice];
-
-		}
-		
-	}
-
-
-
-}
 
 void Character::printStatus() const
 {
@@ -153,7 +131,7 @@ void Character::battle(Enemy & enemy)
 				if (!enemy.isAlice()) {
 					this->winBattle();
 					this->statusUpdate(enemy.getExp(), enemy.getGold());
-					this->inventory.getItem(enemy.getDropChance(), enemy.getLevel());
+					//this->inventory.getItem(enemy.getDropChance(), enemy.getLevel());
 					flag = false;
 					break;
 				};
@@ -230,15 +208,12 @@ void Character::useStatPoint()
 
 				break;
 
-
 			default:
 				break;
 			}
 			cout << " == Status Point: " << this->statPoints << endl;
 		}
 }
-
-
 
 string Character::getAsString() const
 {
